@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "baseUrl": "/app",
+    "rootDir": "./src/main",
+    "outDir": "./dist/appname",
+    "sourceMap": true,
+    "module": "commonjs",
+    "declaration": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "typeRoots": [
+      "./typings",
+      "node_modules/@types"
+    ],
+    "jsx": "react",
+    "noImplicitAny": true,
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "selenium-webdriver": ["./node_modules/@types/selenium-webdriver/index.d.ts"],
+      "e2e_util/*": ["./modules/e2e_util/*"]
+    },
+    "inlineSourceMap": false,
+    "lib": ["es5", "dom", "es2015", "es2015.promise", "es2015.collection", "es2015.iterable"],
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "target": "es5",
+    "types": ["react"]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ],
+  "awesomeTypescriptLoaderOptns": {
+    "useWebpackText": true
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "atom": { "rewriteTsconfig": false }
+}
