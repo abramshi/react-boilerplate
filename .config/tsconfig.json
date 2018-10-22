@@ -1,34 +1,36 @@
 {
   "compilerOptions": {
-    "baseUrl": "/app",
-    "rootDir": "./src/main",
-    "outDir": "./dist/appname",
+    "baseUrl": ".",
+    "rootDir": "../",
+    "outDir": "../dist",
     "sourceMap": true,
     "module": "commonjs",
     "declaration": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
     "removeComments": true,
     "preserveConstEnums": true,
     "typeRoots": [
-      "./typings",
-      "node_modules/@types"
+      "../node_modules/@types"
     ],
     "jsx": "react",
     "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "selenium-webdriver": ["./node_modules/@types/selenium-webdriver/index.d.ts"],
-      "e2e_util/*": ["./modules/e2e_util/*"]
+      "selenium-webdriver": ["../node_modules/@types/selenium-webdriver/index.d.ts"],
+      "rxjs/*": ["../node_modules/rxjs/*"],
+      "@angular/*": ["../node_modules/@angular/*"],
+      "@angular/tsc-wrapped": ["../dist/tools/@angular/tsc-wrapped"],
+      "@angular/tsc-wrapped/*": ["../dist/tools/@angular/tsc-wrapped/*"],
+      "e2e_util/*": ["../modules/e2e_util/*"]
     },
-    "inlineSourceMap": false,
-    "lib": ["es5", "dom", "es2015", "es2015.promise", "es2015.collection", "es2015.iterable"],
+    "inlineSourceMap": true,
+    "lib": ["es5", "dom", "es2017"],
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "target": "es5",
-    "types": ["react"]
+    "types": ["node"]
   },
   "include": [
     "src/**/*"
@@ -39,6 +41,9 @@
   ],
   "awesomeTypescriptLoaderOptns": {
     "useWebpackText": true
+  },
+  "angularCompilerOptions": {
+    "debug": false
   },
   "compileOnSave": false,
   "buildOnSave": false,

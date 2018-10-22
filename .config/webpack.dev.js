@@ -1,43 +1,54 @@
 const webpackMerge = require("webpack-merge");
 const path = require("path");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const commonConfig = require("./webpack.common.js");
 
 module.exports = webpackMerge(commonConfig, {
     devtool: "cheap-module-eval-source-map",
+    mode: 'development',
+    target: 'electron-renderer',
 
     output: {
-        path: path.resolve(__dirname, "../dist/appname"),
-        publicPath: "http://localhost:8080/",
-        filename: "[name].js",
+        path: path.resolve(__dirname, "../dist"),
+        publicPath: "",
+        filename: "[name].bundle.js",
         chunkFilename: "[id].chunk.js"
     },
 
-    // When importing a module whose path matches one of the following, just
-    // assume a corresponding global variable exists and use that instead.
-    // This is important because it allows us to avoid bundling all of our
-    // dependencies, which allows browsers to cache those libraries between builds.
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
-    },
-
     plugins: [
-        new ExtractTextPlugin("[name].css")
+        // new webpack.DefinePlugin({
+        //     "process.env": {
+        //         "NODE_ENV": JSON.stringify("development")
+        //     }
+        // }),
+        new webpack.HotModuleReplacementPlugin()
     ],
 
     devServer: {
         historyApiFallback: true,
         hot: true,
+        compress: true,
         stats: "minimal",
         proxy: {
-            "/service/common/*": {
-                target: "http://localhost/",
-                rewrite: function(req) {
-                    req.url = req.url.replace(/^\/api\/app/, "");
-                },
+            "/api": {
+                target: "http://192.168.1.10/",
+                pathRewrite: {'^/api/path': ""},
                 secure: false
             }
         }
+    },
+
+    module: {
+      rules: [
+        {
+          test: /\.(sa|sc|c)ss$/,
+          use: [
+            'style-loader',
+            'css-loader?sourceMap',
+            'postcss-loader',
+            'sass-loader',
+          ],
+        }
+      ]
     }
 });

@@ -6,8 +6,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     entry: {
         "polyfills": "./src/main/polyfills.ts",
-        "vendor": "./src/main/vendor.ts",
-        "app": "./src/main/main.tsx"
+        "mainview": "./src/main/index.tsx"
     },
 
     resolve: {
@@ -17,17 +16,17 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(ts|tsx)$/,
+                test: /\.ts$/,
                 loaders: [{
                     loader: "awesome-typescript-loader",
                     options: {
-                        configFileName: path.resolve(__dirname, "../tsconfig.json")
+                        configFileName: path.resolve(__dirname, "tsconfig.json")
                     }
-                }]
+                }, "angular2-template-loader"]
             },
             {
                 test: /\.js[x]?$/,
-                include: path.resolve(__dirname, "app"),
+                include: path.resolve(__dirname, "../src/main/js"),
                 exclude: /node_modules/,
                 loader: "babel-loader"
             },
@@ -36,21 +35,22 @@ module.exports = {
                 loader: "html-loader"
             },
             {
-                test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-                loader: "file-loader?name=assets/[name].[hash].[ext]"
+                test: /\.(png|jpe?g|gif|svg|ico)$/,
+                loader: "url-loader",
+                options: {
+                    // path: path.resolve(__dirname, "../dist"),
+                    limit: 10000,
+                    name: 'asset/image/[name].[hash:7].[ext]'
+                }
             },
             {
-                test: /\.css$/,
-                exclude: path.resolve(__dirname, "../src/main"),
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: "css-loader?sourceMap"
-                })
-            },
-            {
-                test: /\.css$/,
-                include: path.resolve(__dirname, "../src/main"),
-                loader: "raw-loader"
+                test: /\.(woff|woff2|ttf|eot)$/,
+                loader: "url-loader",
+                options: {
+                    // path: path.resolve(__dirname, "../dist"),
+                    limit: 10000,
+                    name: 'asset/font/[name].[hash:7].[ext]'
+                }
             }
         ]
     },
@@ -65,7 +65,7 @@ module.exports = {
         ),
 
         new webpack.optimize.CommonsChunkPlugin({
-            name: ["app", "vendor", "polyfills"]
+            name: ["app", "polyfills"]
         }),
 
         new HtmlWebpackPlugin({
