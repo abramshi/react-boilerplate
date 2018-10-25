@@ -11,7 +11,7 @@ const commonConfig = require("./webpack.common.js");
 module.exports = webpackMerge(commonConfig, {
     devtool: "source-map",
     mode: 'production',
-    target: 'electron-renderer',
+    // target: 'electron-renderer',
 
     optimization: {
       minimizer: [
@@ -24,7 +24,7 @@ module.exports = webpackMerge(commonConfig, {
       ]
     },
     output: {
-        path: path.resolve(__dirname, "../dist"),
+        path: path.resolve(__dirname, "../dist/prod"),
         publicPath: "",
         filename: "app/[name].[hash:7].bundle.js",
         chunkFilename: "app/[id].[chunkhash:8].chunk.js"

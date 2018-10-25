@@ -1,6 +1,6 @@
 {
   "rules": {
-    "file-header": [true, "Copyright (c) My Inc\\."],
+    "file-header": [true, "Copyright \\(c\\) My Inc\\."],
     "no-duplicate-imports": true,
     "no-jasmine-focus": true,
     "variable-name": [true, "ban-keywords"],

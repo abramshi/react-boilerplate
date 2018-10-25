@@ -9,7 +9,7 @@
  * @flow
  */
 import { app, BrowserWindow } from 'electron';
-import MenuBuilder from './ts/menu';
+import MenuBuilder from './ts/common/menu';
 
 let mainWindow = null;
 

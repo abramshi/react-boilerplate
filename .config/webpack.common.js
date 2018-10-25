@@ -17,12 +17,12 @@ module.exports = {
         rules: [
             {
                 test: /\.ts$/,
-                loaders: [{
+                loaders: {
                     loader: "awesome-typescript-loader",
                     options: {
                         configFileName: path.resolve(__dirname, "tsconfig.json")
                     }
-                }, "angular2-template-loader"]
+                }
             },
             {
                 test: /\.js[x]?$/,
