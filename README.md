@@ -5,11 +5,12 @@
 ### src/
 Source code for App and unit test.
 * **main/** App source code.
-* **main/js/** Javascript App, here is design for ReactJS
+* **main/js/** Javascript App
 * **main/ts/** Typescript App, here is for Angular and ReactJS
 * **main/\*\*/component/** Component view
-* **main/\*\*/module/** App module, the subsystem designed in business or function.
+* **main/\*\*/module/** App module, the subsystem designed in business , electron main process feature or function.
 * **main/\*\*/service/** A thin service layer of App. Service will communicate to the server. May be split by business. All the service may inherited from a common service.
+* **main/\*\*/state/** Redux feature
 * **main/\*\*/vendor/** the 3rd part app or lib.
 
 ---
