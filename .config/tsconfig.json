@@ -19,11 +19,7 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "selenium-webdriver": ["../node_modules/@types/selenium-webdriver/index.d.ts"],
-      "rxjs/*": ["../node_modules/rxjs/*"],
-      "@angular/*": ["../node_modules/@angular/*"],
-      "@angular/tsc-wrapped": ["../dist/tools/@angular/tsc-wrapped"],
-      "@angular/tsc-wrapped/*": ["../dist/tools/@angular/tsc-wrapped/*"],
-      "e2e_util/*": ["../modules/e2e_util/*"]
+      "rxjs/*": ["../node_modules/rxjs/*"]
     },
     "inlineSourceMap": true,
     "lib": ["es5", "dom", "es2017"],
@@ -41,9 +37,6 @@
   ],
   "awesomeTypescriptLoaderOptns": {
     "useWebpackText": true
-  },
-  "angularCompilerOptions": {
-    "debug": false
   },
   "compileOnSave": false,
   "buildOnSave": false,

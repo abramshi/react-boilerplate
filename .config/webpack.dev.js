@@ -1,7 +1,8 @@
+const webpack = require("webpack");
 const webpackMerge = require("webpack-merge");
 const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const commonConfig = require("./webpack.common.js");
+const cp = require('child_process');
 
 module.exports = webpackMerge(commonConfig, {
     devtool: "cheap-module-eval-source-map",
@@ -9,10 +10,18 @@ module.exports = webpackMerge(commonConfig, {
     // target: 'electron-renderer',
 
     output: {
-        path: path.resolve(__dirname, "../dist"),
+        path: path.resolve(__dirname, "../dist/dev"),
         publicPath: "",
-        filename: "[name].bundle.js",
-        chunkFilename: "[id].chunk.js"
+        filename: "app/[name].bundle.js",
+        chunkFilename: "app/[id].chunk.js"
+    },
+
+    /**
+     * Determine the array of extensions that should be used to resolve modules.
+     */
+    resolve: {
+        mainFields: ['browser', 'module', 'main'],
+        modules: ['../node_modules']
     },
 
     plugins: [
@@ -21,7 +30,8 @@ module.exports = webpackMerge(commonConfig, {
         //         "NODE_ENV": JSON.stringify("development")
         //     }
         // }),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.LoaderOptionsPlugin({debug: true})
     ],
 
     devServer: {
@@ -34,7 +44,7 @@ module.exports = webpackMerge(commonConfig, {
         lazy: false,
         hot: true,
         headers: { 'Access-Control-Allow-Origin': '*' },
-        contentBase: path.join(__dirname, 'dist'),
+        contentBase: path.join(__dirname, 'dist/dev'),
         watchOptions: {
             aggregateTimeout: 300,
             ignored: /node_modules/,
@@ -45,7 +55,7 @@ module.exports = webpackMerge(commonConfig, {
             disableDotRule: false
         },
         proxy: {
-            "/api": {
+            "/myapi": {
                 target: "http://192.168.1.10/",
                 pathRewrite: {'^/api/path': ""},
                 secure: false
@@ -54,7 +64,7 @@ module.exports = webpackMerge(commonConfig, {
         before() {
             if (process.env.START_HOT) {
                 console.log('Starting Main Process...');
-                spawn('npm', ['run', 'start-main-dev'], {
+                cp.spawn('yarn', ['run', 'start:main-dev'], {
                     shell: true,
                     env: process.env,
                     stdio: 'inherit'

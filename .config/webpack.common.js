@@ -16,7 +16,8 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.ts$/,
+                // test: /\.ts[x]?$/,
+                test: /\.(ts|tsx)$/,
                 loaders: {
                     loader: "awesome-typescript-loader",
                     options: {
@@ -25,7 +26,8 @@ module.exports = {
                 }
             },
             {
-                test: /\.js[x]?$/,
+                // test: /\.js[x]?$/,
+                test: /\.(js|jsx)$/,
                 include: path.resolve(__dirname, "../src/main/js"),
                 exclude: /node_modules/,
                 loader: "babel-loader"
@@ -56,18 +58,16 @@ module.exports = {
     },
 
     plugins: [
-        // Workaround for angular/angular#11580
-        new webpack.ContextReplacementPlugin(
-            // The (\\|\/) piece accounts for path separators in *nix and Windows
-            /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-            path.resolve(__dirname, "../src/main"), // location of your src
-            {} // a map of your routes
-        ),
+        // new webpack.ContextReplacementPlugin(
+        //     // The (\\|\/) piece accounts for path separators in *nix and Windows
+        //     /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+        //     path.resolve(__dirname, "../src/main"), // location of your src
+        //     {} // a map of your routes
+        // ),
 
-        new webpack.optimize.CommonsChunkPlugin({
-            name: ["app", "polyfills"]
-        }),
-
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: ["app", "polyfills"]
+        // }),
         new HtmlWebpackPlugin({
             template: "src/main/index.html"
         })

@@ -1,6 +1,7 @@
 /**
  * Menu of electron's main process.
  */
+
 import { app, Menu, shell, BrowserWindow, MenuItemConstructorOptions } from 'electron';
 
 export class MenuBuilder {
@@ -153,27 +154,27 @@ export class MenuBuilder {
                 {
                     label: 'Learn More',
                     click() {
-                        shell.openExternal('https://www.neoedu.com');
+                        shell.openExternal('https://class.cocode.cn');
                     }
                 },
                 {
                     label: 'Documentation',
                     click() {
                         shell.openExternal(
-                            'https://www.neoedu.com'
+                            'https://www.cocode.cn'
                         );
                     }
                 },
                 {
                     label: 'Community Discussions',
                     click() {
-                        shell.openExternal('https://www.neoedu.com');
+                        shell.openExternal('https://www.cocode.cn');
                     }
                 },
                 {
                     label: 'Search Issues',
                     click() {
-                        shell.openExternal('https://www.neoedu.com');
+                        shell.openExternal('https://www.cocode.cn');
                     }
                 }
             ]
@@ -250,27 +251,27 @@ export class MenuBuilder {
                     {
                         label: 'Learn More',
                         click() {
-                            shell.openExternal('http://www.neoedu.com');
+                            shell.openExternal('http://electron.atom.io');
                         }
                     },
                     {
                         label: 'Documentation',
                         click() {
                             shell.openExternal(
-                                'https://www.neoedu.com'
+                                'https://github.com/atom/electron/tree/master/docs#readme'
                             );
                         }
                     },
                     {
                         label: 'Community Discussions',
                         click() {
-                            shell.openExternal('https://www.neoedu.com');
+                            shell.openExternal('https://discuss.atom.io/c/electron');
                         }
                     },
                     {
                         label: 'Search Issues',
                         click() {
-                            shell.openExternal('https://www.neoedu.com');
+                            shell.openExternal('https://github.com/atom/electron/issues');
                         }
                     }
                 ]
