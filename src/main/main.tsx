@@ -28,14 +28,17 @@ if (
     require('module').globalPaths.push(p);
 }
 
-const installExtensions = async () => {
-    const installer = require('electron-devtools-installer');
+const installExtensions = () => {
+    const {
+        default: installExtension,
+        REACT_DEVELOPER_TOOLS,
+        REDUX_DEVTOOLS
+    } = require('electron-devtools-installer');
     const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
-    const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
-
-    return Promise.all(
-        extensions.map(name => installer.default(installer[name], forceDownload))
-    ).catch(console.log);
+    const extensions = [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS];
+    extensions.map(ext => installExtension(ext, forceDownload)
+        .then((name) => console.log(`add extention: ${name}`))
+        .catch((err) => console.log('An error occurred: ', err)));
 };
 
 /**
@@ -50,12 +53,14 @@ app.on('window-all-closed', () => {
     }
 });
 
-app.on('ready', async () => {
+// app.on('ready', async () => {
+app.on('ready', () => {
     if (
         process.env.NODE_ENV === 'development' ||
         process.env.DEBUG_PROD === 'true'
     ) {
-        await installExtensions();
+        // await installExtensions();
+        installExtensions();
     }
 
     mainWindow = new BrowserWindow({
