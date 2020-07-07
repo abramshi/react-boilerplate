@@ -47,7 +47,7 @@
     "babel-plugin-transform-react-remove-prop-types": "0.4.19",
     "conventional-changelog": "latest",
     "devtron": "^1.4.0",
-    "electron": "~3.0.10",
+    "electron": "~9.1.0",
     "electron-builder": "latest",
     "electron-devtools-installer": "latest",
     "eslint": "latest",
